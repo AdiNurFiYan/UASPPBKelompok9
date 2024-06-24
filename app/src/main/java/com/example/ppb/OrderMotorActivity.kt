@@ -2,10 +2,7 @@ package com.example.ppb
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.RadioButton
@@ -22,6 +19,7 @@ class OrderMotorActivity : AppCompatActivity() {
     private lateinit var rgMotorTypes: RadioGroup
     private lateinit var spinnerDays: Spinner
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_motor)
@@ -29,34 +27,30 @@ class OrderMotorActivity : AppCompatActivity() {
         databaseHelper = DatabaseHelper(this)
         rgMotorTypes = findViewById(R.id.rgMotorTypes)
         spinnerDays = findViewById(R.id.spinnerDays)
-        val btnOrder = findViewById<Button>(R.id.btnOrder)
+        val btnOrderMotor = findViewById<Button>(R.id.btnOrderMotor)
 
         loadMotorTypes()
         loadRentalDays()
 
-        btnOrder.setOnClickListener {
+        btnOrderMotor.setOnClickListener {
             val selectedMotorType = findViewById<RadioButton>(rgMotorTypes.checkedRadioButtonId).text.toString()
             val selectedDay = spinnerDays.selectedItem.toString()
-            sendEmail(selectedMotorType, selectedDay)
+            sendOrderMessage(selectedMotorType, selectedDay)
         }
     }
 
     @SuppressLint("Range")
     private fun loadMotorTypes() {
-        val cursor: Cursor? = databaseHelper.getAllMotorTypes()
+        val cursor = databaseHelper.getAllMotorTypes()
         cursor?.let {
             while (it.moveToNext()) {
                 val motorType = it.getString(it.getColumnIndex("name"))
                 val radioButton = RadioButton(this)
-                radioButton.layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
                 radioButton.text = motorType
                 rgMotorTypes.addView(radioButton)
             }
+            cursor.close()
         }
-        cursor?.close()
     }
 
     private fun loadRentalDays() {
@@ -74,15 +68,12 @@ class OrderMotorActivity : AppCompatActivity() {
         spinnerDays.adapter = adapter
     }
 
-    private fun sendEmail(motorType: String, rentalDay: String) {
-        val email = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("mailto:")
-            putExtra(Intent.EXTRA_EMAIL, arrayOf("adikembar0683@gmail.com"))
-            putExtra(Intent.EXTRA_SUBJECT, "Pemesanan Motor")
-            putExtra(Intent.EXTRA_TEXT, "Saya ingin memesan motor $motorType pada hari $rentalDay. Terima kasih.")
+    private fun sendOrderMessage(motorType: String, rentalDay: String) {
+        val message = "Saya ingin memesan motor $motorType pada hari $rentalDay. Terima kasih."
+        val intent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, message)
         }
-        if (email.resolveActivity(packageManager) != null) {
-            startActivity(email)
-        }
+        startActivity(Intent.createChooser(intent, "Kirim pesan menggunakan"))
     }
 }

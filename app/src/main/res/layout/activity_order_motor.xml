@@ -30,6 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pilih Tipe Motor:"
+        android:fontFamily="@font/poppins"
         android:textSize="18sp"
         android:paddingBottom="10dp"/>
 
@@ -42,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pilih Hari Penyewaan:"
+        android:fontFamily="@font/poppins"
         android:textSize="18sp"
         android:paddingTop="20dp"
         android:paddingBottom="10dp"/>
@@ -52,10 +54,13 @@
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btnOrder"
-        android:layout_width="match_parent"
+        android:id="@+id/btnOrderMotor"
+        android:background="@drawable/tombol"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Pesan" />
+        android:text="Pesan"
+        android:fontFamily="@font/poppins"/>
 
 </LinearLayout>

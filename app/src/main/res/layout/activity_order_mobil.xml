@@ -2,15 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="#3576C6"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/pilihanmobil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Mobil"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order Mobil"
-        android:textSize="24sp" />
+        android:text="Pilih Tipe Mobil:"
+        android:fontFamily="@font/poppins"
+        android:textSize="18sp"
+        android:paddingBottom="10dp"/>
 
-    <!-- Tambahkan elemen-elemen untuk pemesanan mobil di sini -->
+    <RadioGroup
+        android:id="@+id/rgMobilTypes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pilih Hari Penyewaan:"
+        android:fontFamily="@font/poppins"
+        android:textSize="18sp"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerDays"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnOrderMobil"
+        android:layout_width="200dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tombol"
+        android:text="Pesan"
+        android:fontFamily="@font/poppins"
+        android:layout_marginTop="20dp"/>
 
 </LinearLayout>
