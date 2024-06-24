@@ -1,0 +1,14 @@
+package com.example.ppb
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+
+class OrderMobilActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_order_mobil)
+
+        // Implementasi halaman pemesanan mobil
+    }
+}
